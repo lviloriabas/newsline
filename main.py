@@ -10,11 +10,14 @@ business = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGx6TVdZU
            'US&ceid=US%3Aen'
 technology = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGRqTVhZU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=' \
              'US&ceid=US%3Aen'
+entertainment = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNREpxYW5RU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=' \
+                'US&ceid=US%3Aen'
 sports = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFp1ZEdvU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=' \
          'US&ceid=US%3Aen'
 science = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFp0Y1RjU0FtVnVHZ0pWVXlnQVAB?hl=en-US&gl=' \
           'US&ceid=US%3Aen'
 health = 'https://news.google.com/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNR3QwTlRFU0FtVnVLQUFQAQ?hl=en-US&gl=US&ceid=US%3Aen'
+
 
 news_limit = 6
 
@@ -26,8 +29,55 @@ def get_news(url):
     articles = soup.find_all('a', class_='DY5T1d RZIKme', limit=news_limit)
 
     for article in articles:
-        print(article.string)
-        print(urljoin(url, article.get('href')))
+        print(article.string + '\n')
+        print(urljoin(url, article.get('href')) + '\n' * 2)
 
 
-get_news(top)
+print("""Options:
+t - Top stories
+us - U.S. news
+w - World news (excluding U.S.)
+b - Business news
+te - Technology news
+e - Entertainment news
+s - Sports news
+sc - Science news
+h - Health news
+q - Quit
+""")
+
+while True:
+    option = input('Choose an option: ')
+    if option == 't':
+        print('Top stories:')
+        get_news(top)
+    elif option == 'us':
+        print('U.S. news')
+        get_news(us)
+    elif option == 'w':
+        print('World news:')
+        get_news(world)
+    elif option == 'b':
+        print('Business news:')
+        get_news(business)
+    elif option == 'te':
+        print('Technology news:')
+        get_news(technology)
+    elif option == 'e':
+        print('Entertainment news:')
+        get_news(entertainment)
+    elif option == 's':
+        print('Sports news:')
+        get_news(sports)
+    elif option == 'sc':
+        print('Science news:')
+        get_news(science)
+    elif option == 'h':
+        print('Health news:')
+        get_news(health)
+    elif option == 'q':
+        print('Quitting program.')
+        break
+    else:
+        print('No option selected. Quitting program.')
+        break
