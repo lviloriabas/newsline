@@ -1,6 +1,9 @@
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+from colorama import init, Fore, Style
 import requests
+
+init(autoreset=True)  # Initilize colorama
 
 top = 'https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en'
 us = 'https://news.google.com/topics/CAAqIggKIhxDQkFTRHdvSkwyMHZNRGxqTjNjd0VnSmxiaWdBUAE?hl=en-US&gl=US&ceid=US%3Aen'
@@ -18,7 +21,6 @@ science = 'https://news.google.com/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRFp0Y1RjU0
           'US&ceid=US%3Aen'
 health = 'https://news.google.com/topics/CAAqIQgKIhtDQkFTRGdvSUwyMHZNR3QwTlRFU0FtVnVLQUFQAQ?hl=en-US&gl=US&ceid=US%3Aen'
 
-
 news_limit = 6
 
 
@@ -29,11 +31,11 @@ def get_news(url):
     articles = soup.find_all('a', class_='DY5T1d RZIKme', limit=news_limit)
 
     for article in articles:
-        print(article.string + '\n')
-        print(urljoin(url, article.get('href')) + '\n' * 2)
+        print(Fore.CYAN + article.string)
+        print(Style.DIM + urljoin(url, article.get('href')) + '\n')
 
 
-print("""Options:
+print(Fore.GREEN + """Options:
 t - Top stories
 us - U.S. news
 w - World news (excluding U.S.)
@@ -47,37 +49,39 @@ q - Quit
 """)
 
 while True:
+
     option = input('Choose an option: ')
+
     if option == 't':
-        print('Top stories:')
+        print(Fore.GREEN + 'Top stories:')
         get_news(top)
     elif option == 'us':
-        print('U.S. news')
+        print(Fore.GREEN + 'U.S. news')
         get_news(us)
     elif option == 'w':
-        print('World news:')
+        print(Fore.GREEN + 'World news:')
         get_news(world)
     elif option == 'b':
-        print('Business news:')
+        print(Fore.GREEN + 'Business news:')
         get_news(business)
     elif option == 'te':
-        print('Technology news:')
+        print(Fore.GREEN + 'Technology news:')
         get_news(technology)
     elif option == 'e':
-        print('Entertainment news:')
+        print(Fore.GREEN + 'Entertainment news:')
         get_news(entertainment)
     elif option == 's':
-        print('Sports news:')
+        print(Fore.GREEN + 'Sports news:')
         get_news(sports)
     elif option == 'sc':
-        print('Science news:')
+        print(Fore.GREEN + 'Science news:')
         get_news(science)
     elif option == 'h':
-        print('Health news:')
+        print(Fore.GREEN + 'Health news:')
         get_news(health)
     elif option == 'q':
-        print('Quitting program.')
+        print(Fore.RED + 'Quitting program.')
         break
     else:
-        print('No option selected. Quitting program.')
+        print(Fore.RED + 'No option selected. Quitting program.')
         break
