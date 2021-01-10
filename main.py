@@ -38,8 +38,8 @@ def get_news(url):
         print(Style.DIM + short_url + '\n')
 
 
-print(Fore.GREEN + """Options:
-t - Top stories
+print(Fore.CYAN + 'Options:')
+print(Fore.GREEN + """t - Top stories
 us - U.S. news
 w - World news (excluding U.S.)
 b - Business news
@@ -53,7 +53,7 @@ q - Quit
 
 while True:
 
-    option = input('Choose an option: ')
+    option = input('Choose an option: ').lower()
 
     if option == 't':
         print(Fore.GREEN + 'Top stories:' + '\n')
@@ -86,4 +86,4 @@ while True:
         print(Fore.RED + 'Quitting program.')
         break
     else:
-        print(Fore.LIGHTRED_EX + 'No option selected. Try again.')
+        print(Fore.LIGHTRED_EX + 'Invalid option selected. Try again.')
