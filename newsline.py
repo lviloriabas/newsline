@@ -6,7 +6,7 @@ from colorama import Fore, Style, init
 from pyshorteners import Shortener
 
 
-init(autoreset=True)  # Initilize coloramat
+init(autoreset=True)  # Initilize colorama
 
 top = "https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en"
 us = (
