@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from colorama import Fore, Style, init
 from pyshorteners import Shortener
 
+
 init(autoreset=True)  # Initilize coloramat
 
 top = "https://news.google.com/topstories?hl=en-US&gl=US&ceid=US:en"
@@ -61,7 +62,9 @@ def get_news(url):
     articles = soup.find_all("a", class_="DY5T1d RZIKme", limit=news_limit)
 
     for article in articles:
-        short_url = Shortener().tinyurl.short(urljoin(url_root, article.get("href")))
+        short_url = Shortener().tinyurl.short(
+            urljoin(url_root, article.get("href"))
+            )
         print(Fore.CYAN + Style.BRIGHT + article.string)
         print(Style.DIM + short_url + "\n")
 
